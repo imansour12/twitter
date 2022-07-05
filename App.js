@@ -3,17 +3,10 @@ import Welcome from "./screens/Welcome";
 import Home from "./screens/Home";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import TopBar from "./components/TopBar";
 
 const Stack = createNativeStackNavigator();
 
-const colorpalette = {
-  dark: "1B2430",
-  blu: "51557E",
-  burple: "816797",
-  bej: "D6D5A8",
-};
-
-//https://stackoverflow.com/questions/67130651/reanimated-2-failed-to-create-a-worklet-maybe-you-forgot-to-add-reanimateds-ba
 let firststartup = true;
 
 //add app registry to the export if there are view errors
@@ -26,7 +19,16 @@ export default function App() {
           component={Welcome}
           options={{ headerShown: false }}
         />
-        <Stack.Screen name="Home" component={Home} />
+        <Stack.Screen
+          name="Home"
+          component={Home}
+          options={{
+            //pass colorpalette to TopBar
+            header: () => <TopBar />,
+            headerShown: true,
+            headerMode: "float",
+          }}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );
